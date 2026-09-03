@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 配置名（在 VS Code 调试下拉框里显示的名字）
+            "name": "启动留言板服务器",
+            // 告诉 VS Code 这是 Go 程序
+            "type": "go",
+            // launch = 从零启动程序；attach = 接管已运行的程序
+            "request": "launch",
+            // auto = 自动判断程序模式（以后写测试也能用这个配置）
+            "mode": "auto",
+            // 要运行哪个文件夹的程序（${workspaceFolder} = 当前打开的文件夹）
+            "program": "${workspaceFolder}",
+            // 服务器输出显示在 VS Code 底部终端里，方便看日志
+            "console": "integratedTerminal"
+        }
+    ]
+}

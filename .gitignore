@@ -1,0 +1,7 @@
+# 编译产物（forum.exe 38MB，不用传，别人 clone 后自己 go build 就行）
+*.exe
+
+# 数据库文件（本地数据不上传）
+*.db
+*.sqlite
+*.sqlite3

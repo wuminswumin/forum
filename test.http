@@ -1,0 +1,58 @@
+### 测试剧本（用 REST Client 插件）
+### ⚠️ 现在全站需要登录：先做测试 1、2（注册+登录），
+###    拿到 token 后粘贴到后面每个测试的 Authorization 里，再测别的
+
+### ── 测试 1：注册学生（学号 + 姓名 + 密码 + 角色）──
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "20251234",
+  "name": "张三",
+  "password": "hello123",
+  "role": "student"
+}
+
+### ── 测试 1b：用白名单学号注册管理员（20240001 是预留学号）──
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "20240001",
+  "name": "管理员",
+  "password": "admin123",
+  "role": "admin"
+}
+
+### ── 测试 2：登录（复制返回的 token 和 role）──
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "20251234",
+  "password": "hello123"
+}
+
+### ── 测试 3：不带 token 看列表（应被门卫拒绝 401）──
+GET http://localhost:8080/api/v1/posts?page=1&page_size=3
+
+### ── 测试 4：带 token 看列表（分页：第 1 页，每页 3 条）──
+GET http://localhost:8080/api/v1/posts?page=1&page_size=3
+Authorization: Bearer 把token粘贴到这里
+
+### ── 测试 5：带 token 发留言 ──
+POST http://localhost:8080/api/v1/posts
+Authorization: Bearer 把token粘贴到这里
+Content-Type: application/json
+
+{
+  "content": "我登录了，这是我的留言！"
+}
+
+### ── 测试 6：删除留言（把 123 换成你的留言 id）──
+DELETE http://localhost:8080/api/v1/posts/123
+Authorization: Bearer 把token粘贴到这里
+
+### ── 测试 7：翻到第 2 页 ──
+GET http://localhost:8080/api/v1/posts?page=2&page_size=3
+Authorization: Bearer 把token粘贴到这里
